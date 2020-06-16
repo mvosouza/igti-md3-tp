@@ -20,6 +20,11 @@ export default class App extends Component {
   };
 
   render() {
+    const colors = {
+      discountINSS: '#e67e22',
+      discountIRPF: '#c0392b',
+      netSalary: '#16a085',
+    };
     const { fullSalary } = this.state;
     const {
       baseINSS,
@@ -28,7 +33,6 @@ export default class App extends Component {
       discountIRPF,
       netSalary,
     } = calculateSalaryFrom(fullSalary);
-
     const discountINSSPercentage = discountINSS / fullSalary;
     const discountIRPFPercentage = discountIRPF / fullSalary;
     const netSalaryPercentage = netSalary / fullSalary;
@@ -48,7 +52,7 @@ export default class App extends Component {
             value={formatCurrency(baseINSS)}
           />
           <InputReadOnly
-            fontColor="#e67e22"
+            fontColor={colors.discountINSS}
             description="Desconto INSS"
             value={`${formatCurrency(discountINSS)} (${formatPercentage(
               discountINSSPercentage
@@ -59,14 +63,14 @@ export default class App extends Component {
             value={formatCurrency(baseIRPF)}
           />
           <InputReadOnly
-            fontColor="#c0392b"
+            fontColor={colors.discountIRPF}
             description="Desconto IRPF"
             value={`${formatCurrency(discountIRPF)} (${formatPercentage(
               discountIRPFPercentage
             )})`}
           />
           <InputReadOnly
-            fontColor="#16a085"
+            fontColor={colors.netSalary}
             description="Salário líquido"
             value={`${formatCurrency(netSalary)} (${formatPercentage(
               netSalaryPercentage
@@ -76,9 +80,9 @@ export default class App extends Component {
         <div className="row">
           <ProgressBarSalary
             bars={[
-              { color: '#e67e22', value: discountINSSPercentage },
-              { color: '#c0392b', value: discountIRPFPercentage },
-              { color: '#16a085', value: netSalaryPercentage },
+              { color: colors.discountINSS, value: discountINSSPercentage },
+              { color: colors.discountIRPF, value: discountIRPFPercentage },
+              { color: colors.netSalary, value: netSalaryPercentage },
             ]}
           />
         </div>
